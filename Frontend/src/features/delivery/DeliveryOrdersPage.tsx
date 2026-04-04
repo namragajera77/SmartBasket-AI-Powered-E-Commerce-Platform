@@ -65,7 +65,8 @@ export function DeliveryOrdersPage() {
 
   return (
     <div className="section-stack">
-      <Card>
+      <Card className="relative overflow-hidden">
+        <div className="absolute right-0 top-0 h-24 w-24 rounded-full bg-orange-100 blur-2xl" />
         <h1 className="text-2xl font-bold text-gray-900">Assigned Deliveries</h1>
       </Card>
 
@@ -81,7 +82,7 @@ export function DeliveryOrdersPage() {
 
       <div className="grid gap-4">
         {activeOrders.map((order) => (
-          <Card key={order.orderId} className="space-y-4 p-4">
+          <Card key={order.orderId} className="space-y-4 p-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <p className="text-sm font-semibold text-gray-900">Order #{order.orderId}</p>
@@ -93,7 +94,7 @@ export function DeliveryOrdersPage() {
                   order.status === "Delivered"
                     ? "bg-emerald-100 text-emerald-700"
                     : order.status === "OutForDelivery"
-                      ? "bg-amber-100 text-amber-700"
+                      ? "bg-orange-100 text-orange-700"
                       : "bg-blue-100 text-blue-700"
                 }`}
               >

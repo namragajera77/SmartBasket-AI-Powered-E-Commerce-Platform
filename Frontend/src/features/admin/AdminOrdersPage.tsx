@@ -9,6 +9,21 @@ import { ErrorMessage } from "../../components/feedback/ErrorMessage";
 import { useToast } from "../../components/feedback/ToastProvider";
 import { formatCurrency, formatDate } from "../../utils/http";
 
+function isRejectedOrder(order: {
+  status?: string;
+  rejectedBy?: string;
+  rejectionReason?: string;
+  rejectedAtUtc?: string;
+}) {
+  const status = (order.status ?? "").toLowerCase();
+  return (
+    status.includes("reject") ||
+    Boolean(order.rejectedBy) ||
+    Boolean(order.rejectionReason) ||
+    Boolean(order.rejectedAtUtc)
+  );
+}
+
 export function AdminOrdersPage() {
   const [deliveryInput, setDeliveryInput] = useState<Record<number, string>>({});
   const [rejectInput, setRejectInput] = useState<Record<number, string>>({});
@@ -54,11 +69,11 @@ export function AdminOrdersPage() {
 
   const orders = ordersQuery.data ?? [];
   const rejectedOrders = useMemo(
-    () => orders.filter((order) => order.status.startsWith("Rejected")),
+    () => orders.filter(isRejectedOrder),
     [orders],
   );
   const activeOrders = useMemo(
-    () => orders.filter((order) => order.status !== "Delivered" && !order.status.startsWith("Rejected")),
+    () => orders.filter((order) => order.status !== "Delivered" && !isRejectedOrder(order)),
     [orders],
   );
   const totalPages = Math.max(1, Math.ceil(activeOrders.length / pageSize));
@@ -114,7 +129,7 @@ export function AdminOrdersPage() {
             </thead>
             <tbody className="divide-y divide-gray-100 bg-white">
               {pagedOrders.map((order) => {
-                const isLockedAssignment = ["Assigned", "OutForDelivery", "Delivered"].includes(order.status) || order.status.startsWith("Rejected");
+                const isLockedAssignment = ["Assigned", "OutForDelivery", "Delivered"].includes(order.status) || isRejectedOrder(order);
 
                 return <tr key={order.orderId} className="transition-all duration-200 hover:bg-gray-50">
                   <td className="px-4 py-3 font-medium text-gray-900">#{order.orderId}</td>

@@ -33,13 +33,24 @@ export function CheckoutPage() {
   });
 
   return (
-    <div className="mx-auto max-w-2xl section-stack">
-      <Card className="space-y-4">
-        <h1 className="text-2xl font-bold text-gray-900">Checkout</h1>
-        <p className="text-sm text-gray-600">Submit your shipping details to place the order.</p>
+    <div className="mx-auto max-w-3xl section-stack">
+      <Card className="space-y-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Checkout</h1>
+            <p className="text-sm text-gray-600">Submit your shipping details to place the order.</p>
+          </div>
+          <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-600">
+            <span className="rounded-full bg-blue-600 px-2 py-1 text-white">1</span>
+            Shipping
+            <span className="text-slate-300">/</span>
+            <span className="rounded-full bg-slate-300 px-2 py-1 text-white">2</span>
+            Confirmation
+          </div>
+        </div>
 
         <form
-          className="space-y-4"
+          className="space-y-5"
           onSubmit={(event) => {
             event.preventDefault();
             checkoutMutation.mutate();
@@ -53,9 +64,14 @@ export function CheckoutPage() {
             placeholder="Street, city, postal code"
           />
 
+          <div className="rounded-2xl border border-orange-100 bg-orange-50 p-4">
+            <p className="text-xs font-semibold uppercase tracking-wide text-orange-600">Order Summary</p>
+            <p className="mt-2 text-sm text-orange-900">Your cart items and total amount will be confirmed in the next step.</p>
+          </div>
+
           {checkoutMutation.isError ? <ErrorMessage message={checkoutMutation.error.message} /> : null}
 
-          <Button type="submit" disabled={checkoutMutation.isPending || shippingAddress.trim().length < 8}>
+          <Button type="submit" className="w-full sm:w-auto" disabled={checkoutMutation.isPending || shippingAddress.trim().length < 8}>
             {checkoutMutation.isPending ? "Placing order..." : "Place Order"}
           </Button>
         </form>

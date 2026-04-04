@@ -5,18 +5,31 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg: 247 249 252;
+    --surface: 255 255 255;
+    --text: 12 24 44;
+    --muted: 98 116 142;
+    --primary: 25 96 255;
+    --primary-strong: 15 70 210;
+    --accent: 247 148 30;
+    --border: 224 232 244;
+  }
+
   html {
     font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply m-0 min-h-screen bg-gray-100 text-gray-900;
+    @apply m-0 min-h-screen text-slate-900;
     background-image:
-      radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.08), transparent 30%),
-      radial-gradient(circle at 100% 0%, rgba(79, 70, 229, 0.1), transparent 35%);
+      radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.09), transparent 32%),
+      radial-gradient(circle at 100% 0%, rgba(251, 146, 60, 0.12), transparent 34%),
+      linear-gradient(180deg, #f8fbff 0%, #f3f6fb 100%);
   }
 
   #root {
@@ -25,31 +38,62 @@
 }
 
 @layer components {
+  .container-custom {
+    @apply mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8;
+  }
+
   .card-surface {
-    @apply rounded-xl bg-white p-6 shadow-sm transition-all duration-200;
-    border: 1px solid rgba(229, 231, 235, 0.9);
+    @apply rounded-2xl bg-white p-6 transition-all duration-300;
+    border: 1px solid rgb(var(--border) / 0.9);
+    box-shadow: 0 8px 30px rgba(11, 35, 77, 0.06);
   }
 
   .card-surface-hover {
-    @apply rounded-xl bg-white p-6 shadow-sm transition-all duration-200;
-    border: 1px solid rgba(229, 231, 235, 0.9);
+    @apply rounded-2xl bg-white p-6 transition-all duration-300;
+    border: 1px solid rgb(var(--border) / 0.9);
+    box-shadow: 0 8px 30px rgba(11, 35, 77, 0.06);
   }
 
   .card-surface-hover:hover {
-    @apply scale-[1.02] shadow-lg;
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(20, 52, 108, 0.14);
   }
 
   .section-stack {
-    @apply flex flex-col gap-4;
+    @apply flex flex-col gap-6;
   }
 
   .premium-panel {
-    @apply rounded-xl bg-white p-6 shadow-sm;
-    border: 1px solid rgba(229, 231, 235, 0.9);
+    @apply rounded-2xl bg-white p-6;
+    border: 1px solid rgb(var(--border) / 0.9);
+    box-shadow: 0 10px 36px rgba(11, 35, 77, 0.08);
   }
 
   .status-pill {
-    @apply inline-flex rounded-full px-3 py-1 text-xs font-semibold;
+    @apply inline-flex rounded-full px-3 py-1 text-xs font-semibold tracking-wide;
+  }
+
+  .glass-card {
+    @apply rounded-2xl border border-white/50 bg-white/75 backdrop-blur-xl;
+    box-shadow: 0 12px 32px rgba(17, 43, 83, 0.09);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60;
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.26);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-700 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center rounded-xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-orange-600 active:translate-y-0;
+    box-shadow: 0 10px 20px rgba(249, 115, 22, 0.26);
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition-all duration-200 placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100;
   }
 
   .hero-animated-bg {
@@ -63,6 +107,15 @@
   }
 
   .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
 }

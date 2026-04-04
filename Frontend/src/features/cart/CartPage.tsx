@@ -58,7 +58,8 @@ export function CartPage() {
 
   return (
     <div className="section-stack">
-      <Card>
+      <Card className="relative overflow-hidden">
+        <div className="absolute right-0 top-0 h-24 w-24 rounded-full bg-blue-100 blur-2xl" />
         <h1 className="text-2xl font-bold text-gray-900">Your Cart</h1>
         <p className="mt-1 text-sm text-gray-600">Review selected items and continue to checkout.</p>
       </Card>
@@ -66,11 +67,11 @@ export function CartPage() {
       <div className="grid gap-4 lg:grid-cols-[1fr_300px]">
         <div className="space-y-4">
           {items.map((item) => (
-            <Card key={item.cartItemId} className="flex flex-col gap-3 p-4 md:flex-row md:items-center md:justify-between">
+            <Card key={item.cartItemId} className="flex flex-col gap-3 p-5 md:flex-row md:items-center md:justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">{item.productName}</h2>
                 <p className="text-sm text-gray-500">{formatCurrency(item.price)} each</p>
-                <p className="text-sm font-semibold text-gray-800">Subtotal: {formatCurrency(item.subtotal)}</p>
+                <p className="mt-1 inline-flex rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-700">Subtotal: {formatCurrency(item.subtotal)}</p>
               </div>
 
               <div className="flex items-center gap-2">
@@ -97,7 +98,7 @@ export function CartPage() {
           ))}
         </div>
 
-        <Card className="h-fit space-y-4">
+        <Card className="h-fit space-y-4 border-orange-100 bg-gradient-to-b from-white to-orange-50/50">
           <h3 className="text-lg font-semibold text-gray-900">Order Summary</h3>
           <div className="flex justify-between text-sm text-gray-600">
             <span>Items</span>
@@ -105,7 +106,7 @@ export function CartPage() {
           </div>
           <div className="flex justify-between text-sm text-gray-600">
             <span>Total</span>
-            <span className="font-semibold text-gray-900">{formatCurrency(total)}</span>
+            <span className="text-xl font-bold text-gray-900">{formatCurrency(total)}</span>
           </div>
           <Link to="/checkout" className="block">
             <Button className="w-full">Proceed To Checkout</Button>

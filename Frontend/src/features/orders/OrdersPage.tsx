@@ -7,6 +7,21 @@ import { ErrorMessage } from "../../components/feedback/ErrorMessage";
 import { EmptyState } from "../../components/feedback/EmptyState";
 import { formatCurrency, formatDate } from "../../utils/http";
 
+function isRejectedOrder(order: {
+  status?: string;
+  rejectedBy?: string;
+  rejectionReason?: string;
+  rejectedAtUtc?: string;
+}) {
+  const status = (order.status ?? "").toLowerCase();
+  return (
+    status.includes("reject") ||
+    Boolean(order.rejectedBy) ||
+    Boolean(order.rejectionReason) ||
+    Boolean(order.rejectedAtUtc)
+  );
+}
+
 export function OrdersPage() {
   const ordersQuery = useQuery({
     queryKey: ["my-orders"],
@@ -43,7 +58,7 @@ export function OrdersPage() {
                 {order.deliveryOtp && !order.otpVerified && ["Assigned", "OutForDelivery"].includes(order.status) ? (
                   <p className="mt-1 text-xs font-semibold text-amber-700">OTP to share with delivery boy: {order.deliveryOtp}</p>
                 ) : null}
-                {order.status.startsWith("Rejected") ? (
+                {isRejectedOrder(order) ? (
                   <p className="mt-1 text-xs font-semibold text-rose-700">
                     {order.rejectedBy ?? order.status}: {order.rejectionReason ?? "No reason provided"}
                   </p>

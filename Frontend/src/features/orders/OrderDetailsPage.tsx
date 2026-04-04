@@ -10,6 +10,21 @@ import { formatCurrency, formatDate } from "../../utils/http";
 import { useState } from "react";
 import { useToast } from "../../components/feedback/ToastProvider";
 
+function isRejectedOrder(order: {
+  status?: string;
+  rejectedBy?: string;
+  rejectionReason?: string;
+  rejectedAtUtc?: string;
+}) {
+  const status = (order.status ?? "").toLowerCase();
+  return (
+    status.includes("reject") ||
+    Boolean(order.rejectedBy) ||
+    Boolean(order.rejectionReason) ||
+    Boolean(order.rejectedAtUtc)
+  );
+}
+
 export function OrderDetailsPage() {
   const params = useParams();
   const orderId = Number(params.orderId);
@@ -45,7 +60,7 @@ export function OrderDetailsPage() {
   }
 
   const order = orderQuery.data;
-  const canReject = order.status !== "Delivered" && !order.status.startsWith("Rejected");
+  const canReject = order.status !== "Delivered" && !isRejectedOrder(order);
 
   return (
     <div className="section-stack">
@@ -84,7 +99,7 @@ export function OrderDetailsPage() {
             </div>
           </div>
         ) : null}
-        {order.status.startsWith("Rejected") ? (
+        {isRejectedOrder(order) ? (
           <div className="rounded-lg border border-rose-200 bg-rose-50 p-3">
             <p className="text-xs font-semibold uppercase tracking-wide text-rose-700">Rejection History</p>
             <p className="mt-1 text-sm text-rose-900">Rejected By: {order.rejectedBy ?? order.status}</p>

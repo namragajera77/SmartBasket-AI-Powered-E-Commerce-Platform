@@ -24,9 +24,9 @@ interface ToastContextValue {
 const ToastContext = createContext<ToastContextValue | null>(null);
 
 const variantClassMap: Record<ToastVariant, string> = {
-  success: "border-emerald-200 bg-emerald-50 text-emerald-900",
-  error: "border-red-200 bg-red-50 text-red-900",
-  info: "border-blue-200 bg-blue-50 text-blue-900",
+  success: "border-emerald-200 bg-emerald-50/90 text-emerald-900",
+  error: "border-red-200 bg-red-50/90 text-red-900",
+  info: "border-blue-200 bg-blue-50/90 text-blue-900",
 };
 
 export function ToastProvider({ children }: PropsWithChildren) {
@@ -40,7 +40,7 @@ export function ToastProvider({ children }: PropsWithChildren) {
 
     window.setTimeout(() => {
       setToasts((previous) => previous.filter((item) => item.id !== id));
-    }, 3500);
+    }, 3200);
   }, []);
 
   const value = useMemo<ToastContextValue>(() => ({ showToast }), [showToast]);
@@ -53,7 +53,7 @@ export function ToastProvider({ children }: PropsWithChildren) {
           <div
             key={toast.id}
             className={cn(
-              "pointer-events-auto rounded-xl border p-4 shadow-md transition-all",
+              "pointer-events-auto rounded-2xl border p-4 shadow-xl backdrop-blur-sm transition-all",
               variantClassMap[toast.variant],
             )}
           >
