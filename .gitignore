@@ -1,0 +1,67 @@
+# =========================
+# E-Commerce unified .gitignore
+# Keep source code, block secrets and local/runtime files
+# =========================
+
+# --- Git / Editor / OS ---
+.git/
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
+logs/
+
+# --- Environment and credentials ---
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Local secrets/config overrides
+secrets.json
+**/secrets.json
+appsettings.Local.json
+**/appsettings.Local.json
+
+# Block real appsettings files that may contain credentials
+EcommerceAI/appsettings.json
+EcommerceAI/appsettings.Development.json
+EcommerceAI/appsettings.Production.json
+EcommerceAI/appsettings.*.json
+
+# Optional credential-bearing scripts
+seed_patch.ps1
+seed_products.ps1
+
+# --- .NET / C# build output ---
+**/bin/
+**/obj/
+**/TestResults/
+*.user
+*.suo
+*.cache
+
+# --- Node / Frontend build output ---
+node_modules/
+**/node_modules/
+dist/
+build/
+coverage/
+.npm/
+.npm-cache/
+.pnpm-store/
+
+# Local temp/cache folders in this repo
+.tmp/
+.dist/
+
+# --- Generated lock/state (keep if desired) ---
+# package-lock.json
+# pnpm-lock.yaml
+# yarn.lock

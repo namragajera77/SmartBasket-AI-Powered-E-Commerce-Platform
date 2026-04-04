@@ -1,0 +1,109 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <AssemblyName>EcommerceAI</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>12.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core" />
+    <Reference Include="Microsoft.AspNetCore" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions" />
+    <Reference Include="Serilog">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.AspNetCore.SwaggerGen">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.RateLimiting" />
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions" />
+    <Reference Include="Microsoft.AspNetCore.RateLimiting" />
+    <Reference Include="Microsoft.AspNetCore.Cors" />
+    <Reference Include="Microsoft.OpenApi">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Microsoft.OpenApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Pomelo.EntityFrameworkCore.MySql">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Pomelo.EntityFrameworkCore.MySql.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.JwtBearer">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions" />
+    <Reference Include="System.Linq" />
+    <Reference Include="System.Collections" />
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions" />
+    <Reference Include="Microsoft.AspNetCore.Http.Features" />
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions" />
+    <Reference Include="System.Linq.Expressions" />
+    <Reference Include="System.ComponentModel.Annotations" />
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions" />
+    <Reference Include="System.Text.Json" />
+    <Reference Include="System.Security.Claims" />
+    <Reference Include="Microsoft.IdentityModel.Tokens">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization" />
+    <Reference Include="Swashbuckle.AspNetCore.Annotations">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Swashbuckle.AspNetCore.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Primitives" />
+    <Reference Include="System.Security.Cryptography" />
+    <Reference Include="System.Threading" />
+    <Reference Include="Microsoft.EntityFrameworkCore.Abstractions">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices" />
+    <Reference Include="Serilog.Extensions.Hosting">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Serilog.Extensions.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc" />
+    <Reference Include="Microsoft.Extensions.Caching.Memory" />
+    <Reference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" />
+    <Reference Include="Microsoft.Extensions.Configuration" />
+    <Reference Include="Microsoft.AspNetCore.Authentication" />
+    <Reference Include="Microsoft.AspNetCore.Authorization.Policy" />
+    <Reference Include="Microsoft.Extensions.Http" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="Swashbuckle.AspNetCore.Swagger">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.AspNetCore.SwaggerUI">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.AspNetCore">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Serilog.AspNetCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.HttpsPolicy" />
+    <Reference Include="Microsoft.AspNetCore.StaticFiles" />
+    <Reference Include="Microsoft.AspNetCore.Routing" />
+    <Reference Include="Serilog.Settings.Configuration">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Serilog.Settings.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Console">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Serilog.Sinks.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File">
+      <HintPath>..\EcommerceAI\bin\Debug\net10.0\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="BCrypt.Net-Next" />
+    <Reference Include="System.Linq.Queryable" />
+  </ItemGroup>
+</Project>

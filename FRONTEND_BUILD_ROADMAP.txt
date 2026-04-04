@@ -1,0 +1,341 @@
+AI-POWERED E-COMMERCE FRONTEND BUILD ROADMAP (PRODUCTION)
+
+Goal:
+Build a production-level frontend that fully covers your backend features:
+- JWT auth with roles
+- categories and products
+- pagination/filter/sort
+- image upload
+- cart and checkout
+- order management and delivery OTP
+- reviews and ratings
+- AI features (description, review summary, smart search, recommendations)
+
+Recommended Stack:
+1. React + TypeScript + Vite
+2. React Router
+3. TanStack Query
+4. Axios
+5. React Hook Form + Zod
+6. Tailwind CSS (or MUI)
+
+====================================================================
+PHASE 1: PROJECT SETUP (DO FIRST)
+====================================================================
+
+1) Create frontend project
+- Initialize React + TypeScript app.
+- Install required packages.
+
+2) Create base structure
+- src/app
+- src/api
+- src/auth
+- src/features
+- src/components
+- src/types
+- src/utils
+
+3) Environment config
+- Add .env file with API base URL, for example:
+  VITE_API_URL=http://localhost:5240
+
+4) Setup global providers
+- QueryClientProvider
+- RouterProvider
+- AuthProvider
+- Toast/Notification provider
+
+====================================================================
+PHASE 2: GLOBAL API CONTRACT LAYER (VERY IMPORTANT)
+====================================================================
+
+Define these shared frontend types first:
+
+1) ApiResponse<T>
+- success
+- data
+- error
+- message
+
+2) PaginatedResponse<T>
+- page
+- pageSize
+- totalItems
+- items
+
+3) Domain DTO types
+- Product, Category, CartItem, Order, Review
+- SmartSearchResponse
+- RecommendationResponse
+
+Create a single Axios client with:
+- baseURL from VITE_API_URL
+- request interceptor to attach JWT token
+- response/error interceptor to normalize backend errors
+
+====================================================================
+PHASE 3: AUTHENTICATION + ROLE SYSTEM
+====================================================================
+
+Build first because many pages are role-protected.
+
+Pages:
+1) /login
+2) /register
+
+Backend APIs:
+- POST /api/auth/login
+- POST /api/auth/register
+- POST /api/auth/refresh
+
+Implement:
+- token storage strategy
+- current user and role state
+- route guards:
+  - Admin
+  - Customer
+  - Delivery
+  - Public
+
+====================================================================
+PHASE 4: APP LAYOUT + NAVIGATION
+====================================================================
+
+Create layout system before feature pages.
+
+Layouts:
+1) PublicLayout
+2) CustomerLayout
+3) AdminLayout
+4) DeliveryLayout
+
+Navigation examples:
+- Public: Home, Products, Login
+- Customer: Products, Cart, My Orders
+- Admin: Categories, Products, Orders, AI Tools
+- Delivery: Assigned Orders, OTP Verification
+
+Include global:
+- loading bar/spinner
+- toast notifications
+- error boundary page
+
+====================================================================
+PHASE 5: PRODUCT CATALOG (CORE USER FLOW)
+====================================================================
+
+Build these pages:
+1) /products
+2) /products/:id
+
+Use backend query params fully:
+- page
+- pageSize
+- categoryId
+- minPrice
+- maxPrice
+- sortBy (price, createdDate, rating)
+
+Requirements:
+- URL query params sync
+- pagination component
+- filter bar
+- sort selector
+- empty/error/loading states
+
+Backend APIs:
+- GET /api/products
+- GET /api/products/{id}
+- GET /api/categories
+
+====================================================================
+PHASE 6: ADMIN CATALOG MANAGEMENT
+====================================================================
+
+Pages:
+1) /admin/categories
+2) /admin/products
+3) /admin/products/new
+4) /admin/products/:id/edit
+
+Backend APIs:
+- POST /api/categories
+- POST /api/products/upload-image
+- POST /api/products
+- PUT /api/products/{id}
+- DELETE /api/products/{id}
+
+Important image flow:
+1) Upload image via multipart/form-data endpoint
+2) Receive imageUrl
+3) Submit product create/update with that imageUrl
+
+====================================================================
+PHASE 7: CART + CHECKOUT
+====================================================================
+
+Pages:
+1) /cart
+2) /checkout
+
+Backend APIs:
+- GET /api/cart
+- POST /api/cart/add
+- PUT /api/cart/update/{cartItemId}
+- DELETE /api/cart/remove/{cartItemId}
+- POST /api/orders/checkout
+
+Requirements:
+- quantity update and remove
+- checkout address form
+- success/failure handling
+
+====================================================================
+PHASE 8: ORDERS + DELIVERY MODULE
+====================================================================
+
+Customer pages:
+1) /orders
+2) /orders/:id
+
+Admin pages:
+1) /admin/orders
+- assign delivery
+
+Delivery pages:
+1) /delivery/orders
+2) /delivery/orders/:id/verify-otp
+
+Backend APIs:
+- GET /api/orders/my-orders
+- GET /api/orders/{id}
+- GET /api/orders (admin)
+- PUT /api/orders/assign-delivery/{orderId}
+- Delivery OTP endpoint
+
+====================================================================
+PHASE 9: REVIEWS + RATINGS
+====================================================================
+
+Place in product details page:
+- list reviews
+- create review
+- edit/delete own review
+- show average rating
+
+Backend APIs:
+- review CRUD endpoints
+- GET /api/products/{productId}/reviews
+
+====================================================================
+PHASE 10: AI FEATURES UI
+====================================================================
+
+Build these pages/sections:
+
+1) Smart Search Page (/search)
+- POST /api/ai/smart-search
+- show ranked cards and score badges
+
+2) Product Recommendations (in product detail)
+- GET /api/ai/recommendations/{productId}
+- show up to top 5 related items
+
+3) Admin AI Description Tool
+- POST /api/ai/generate-description
+
+4) Admin AI Review Summary Tool
+- POST /api/ai/summarize-reviews/{productId}
+
+====================================================================
+PHASE 11: CACHING STRATEGY IN FRONTEND
+====================================================================
+
+Use TanStack Query keys consistently:
+- products-list
+- product-detail
+- categories-list
+- cart
+- my-orders
+- admin-orders
+- smart-search
+- recommendations
+
+Invalidation rules:
+- On product create/update/delete:
+  invalidate products-list, product-detail, recommendations, smart-search
+- On category create:
+  invalidate categories-list and products-list
+
+====================================================================
+PHASE 12: PRODUCTION UX + RESILIENCE
+====================================================================
+
+Add:
+1) skeleton loaders
+2) robust empty states
+3) standardized error display (from backend message/error)
+4) confirmation dialogs for delete actions
+5) form validation (client + server errors)
+6) 429 rate-limit handling with retry/backoff messaging
+
+====================================================================
+PHASE 13: TESTING CHECKLIST
+====================================================================
+
+Must test before release:
+
+1) Auth
+- login/register/role access
+
+2) Products
+- pagination/filter/sort combinations
+
+3) Upload
+- product image upload and display
+
+4) Cart/Checkout
+- add/update/remove/checkout
+
+5) Orders/Delivery
+- assign delivery and OTP verification
+
+6) Reviews
+- create/update/delete rules
+
+7) AI
+- smart search relevance
+- recommendations exclude current product
+- description generation and review summary
+
+8) Error handling
+- verify wrapped success and standardized errors
+
+====================================================================
+PHASE 14: RELEASE READINESS
+====================================================================
+
+Before production:
+1) env separation (dev/staging/prod)
+2) secure token handling
+3) route protection audit
+4) performance checks
+5) logging/monitoring integration
+6) CI pipeline for lint/test/build
+
+====================================================================
+SUGGESTED IMPLEMENTATION ORDER (SHORT VERSION)
+====================================================================
+
+1) Setup + API layer + auth
+2) Product list/details with pagination/filter/sort
+3) Admin category/product + image upload
+4) Cart + checkout
+5) Orders + delivery OTP
+6) Reviews
+7) AI smart search + recommendations
+8) AI admin tools
+9) hardening: UX, tests, monitoring
+
+End of roadmap.
