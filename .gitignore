@@ -38,6 +38,7 @@ Backend/appsettings.json
 Backend/appsettings.Development.json
 Backend/appsettings.Production.json
 Backend/appsettings.*.json
+!Backend/appsettings.Local.example.json
 
 # Optional credential-bearing scripts
 seed_patch.ps1

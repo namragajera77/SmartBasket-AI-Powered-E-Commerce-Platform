@@ -18,6 +18,13 @@ using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
+LoadDotEnv(Path.Combine(builder.Environment.ContentRootPath, ".env"));
+
+builder.Configuration
+    .AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.Local.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
 Directory.CreateDirectory(Path.Combine(builder.Environment.ContentRootPath, "wwwroot", "uploads"));
 
 builder.Host.UseSerilog((context, loggerConfiguration) =>
@@ -196,3 +203,39 @@ app.MapControllers();
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
 
 app.Run();
+
+static void LoadDotEnv(string filePath)
+{
+    if (!File.Exists(filePath))
+    {
+        return;
+    }
+
+    foreach (var line in File.ReadAllLines(filePath))
+    {
+        var trimmed = line.Trim();
+        if (string.IsNullOrWhiteSpace(trimmed) || trimmed.StartsWith("#", StringComparison.Ordinal))
+        {
+            continue;
+        }
+
+        var separatorIndex = trimmed.IndexOf('=');
+        if (separatorIndex <= 0)
+        {
+            continue;
+        }
+
+        var key = trimmed[..separatorIndex].Trim();
+        var value = trimmed[(separatorIndex + 1)..].Trim();
+
+        if (value.Length >= 2 && value.StartsWith('"') && value.EndsWith('"'))
+        {
+            value = value[1..^1];
+        }
+
+        if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable(key)))
+        {
+            Environment.SetEnvironmentVariable(key, value);
+        }
+    }
+}
