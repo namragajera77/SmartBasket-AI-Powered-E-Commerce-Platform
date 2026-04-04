@@ -34,6 +34,10 @@ EcommerceAI/appsettings.json
 EcommerceAI/appsettings.Development.json
 EcommerceAI/appsettings.Production.json
 EcommerceAI/appsettings.*.json
+Backend/appsettings.json
+Backend/appsettings.Development.json
+Backend/appsettings.Production.json
+Backend/appsettings.*.json
 
 # Optional credential-bearing scripts
 seed_patch.ps1
