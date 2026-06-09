@@ -37,6 +37,8 @@ builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ApiResponseWrapperFilter>();
 });
+
+
 builder.Services.AddMemoryCache();
 builder.Services.AddScoped<ApiResponseWrapperFilter>();
 
@@ -239,3 +241,40 @@ static void LoadDotEnv(string filePath)
         }
     }
 }
+
+
+
+// var builder = WebApplication.CreateBuilder(args);
+
+// // Controllers
+// builder.Services.AddControllers();
+
+// // Database
+// builder.Services.AddDbContext<AppDbContext>();
+
+// // JWT Authentication
+// builder.Services.AddAuthentication()
+//                 .AddJwtBearer();
+
+// // Authorization
+// builder.Services.AddAuthorization();
+
+// // CORS
+// builder.Services.AddCors();
+
+// // Dependency Injection
+// builder.Services.AddScoped<IUserRepository, UserRepository>();
+// builder.Services.AddScoped<IOrderService, OrderService>();
+
+// var app = builder.Build();
+
+// // Middleware Pipeline
+// app.UseCors();
+
+// app.UseAuthentication();
+// app.UseAuthorization();
+
+// app.MapControllers();
+
+// app.Run();
+
