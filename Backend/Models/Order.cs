@@ -1,189 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 
 namespace EcommerceAI.Models;
 
 public class Order
 {
-	[field: CompilerGenerated]
-		public int Id
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    public int Id { get; set; }
 
-	[field: CompilerGenerated]
-		public int UserId
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    public int UserId { get; set; }
 
-	[field: CompilerGenerated]
-		public int? DeliveryBoyId
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    public int? DeliveryBoyId { get; set; }
 
-	[MaxLength(10)]
-	[field: CompilerGenerated]
-		public string? DeliveryOTP
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    [MaxLength(10)]
+    public string? DeliveryOTP { get; set; }
 
-	[field: CompilerGenerated]
-		public System.DateTime? OTPGeneratedAt
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    public DateTime? OTPGeneratedAt { get; set; }
 
-	[field: CompilerGenerated]
-		public bool OTPVerified
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    public bool OTPVerified { get; set; }
 
-	[Required]
-	[MaxLength(32)]
-	[field: CompilerGenerated]
-		public string Status
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	} = "Pending";
+    [Required]
+    [MaxLength(32)]
+    public string Status { get; set; } = "Pending";
 
-	[Range(0.0, 1.7976931348623157E+308)]
-	[field: CompilerGenerated]
-		public decimal TotalAmount
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    [Range(0.0, double.MaxValue)]
+    public decimal TotalAmount { get; set; }
 
-	[field: CompilerGenerated]
-		public System.DateTime? PackedAtUtc
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    public DateTime? PackedAtUtc { get; set; }
 
-	[field: CompilerGenerated]
-		public System.DateTime? OutForDeliveryAtUtc
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    public DateTime? OutForDeliveryAtUtc { get; set; }
 
-	[field: CompilerGenerated]
-		public System.DateTime? DeliveredAtUtc
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    public DateTime? DeliveredAtUtc { get; set; }
 
-	[MaxLength(32)]
-	[field: CompilerGenerated]
-		public string? RejectedBy
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    [MaxLength(32)]
+    public string? RejectedBy { get; set; }
 
-	[MaxLength(500)]
-	[field: CompilerGenerated]
-		public string? RejectionReason
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    [MaxLength(500)]
+    public string? RejectionReason { get; set; }
 
-	[field: CompilerGenerated]
-		public System.DateTime? RejectedAtUtc
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    public DateTime? RejectedAtUtc { get; set; }
 
-	[field: CompilerGenerated]
-		public System.DateTime OrderedAtUtc
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	} = System.DateTime.UtcNow;
+    public DateTime OrderedAtUtc { get; set; } = DateTime.UtcNow;
 
-	[MaxLength(500)]
-	[field: CompilerGenerated]
-		public string? ShippingAddress
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    [MaxLength(500)]
+    public string? ShippingAddress { get; set; }
 
-	[field: CompilerGenerated]
-		public User Customer
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	} = null;
+    public User Customer { get; set; } = null;
 
-	[field: CompilerGenerated]
-		public User? DeliveryBoy
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    public User? DeliveryBoy { get; set; }
 
-	[field: CompilerGenerated]
-		public System.Collections.Generic.ICollection<OrderItem> OrderItems
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	} = (System.Collections.Generic.ICollection<OrderItem>)new List<OrderItem>();
+    public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }
-

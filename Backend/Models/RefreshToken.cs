@@ -1,85 +1,26 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 
 namespace EcommerceAI.Models;
 
 public class RefreshToken
 {
-	[field: CompilerGenerated]
-		public int Id
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    public int Id { get; set; }
 
-	[field: CompilerGenerated]
-		public int UserId
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    public int UserId { get; set; }
 
-	[Required]
-	[MaxLength(128)]
-	[field: CompilerGenerated]
-		public string TokenHash
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	} = string.Empty;
+    [Required]
+    [MaxLength(128)]
+    public string TokenHash { get; set; } = string.Empty;
 
-	[field: CompilerGenerated]
-		public System.DateTime ExpiresAtUtc
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    public DateTime ExpiresAtUtc { get; set; }
 
-	[field: CompilerGenerated]
-		public System.DateTime CreatedAtUtc
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	} = System.DateTime.UtcNow;
+    public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
 
-	[field: CompilerGenerated]
-		public System.DateTime? RevokedAtUtc
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    public DateTime? RevokedAtUtc { get; set; }
 
-	[MaxLength(128)]
-	[field: CompilerGenerated]
-		public string? ReplacedByTokenHash
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	}
+    [MaxLength(128)]
+    public string? ReplacedByTokenHash { get; set; }
 
-	[field: CompilerGenerated]
-		public User User
-	{
-		[CompilerGenerated]
-		get;
-		[CompilerGenerated]
-		set;
-	} = null;
+    public User User { get; set; } = null;
 }
-
